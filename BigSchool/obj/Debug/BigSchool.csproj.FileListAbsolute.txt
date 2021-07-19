@@ -118,3 +118,4 @@ C:\Users\ASUS\source\repos\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.CoreCo
 C:\Users\ASUS\source\repos\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.CopyComplete
 C:\Users\ASUS\source\repos\BigSchool\BigSchool\obj\Debug\BigSchool.dll
 C:\Users\ASUS\source\repos\BigSchool\BigSchool\obj\Debug\BigSchool.pdb
+C:\Users\ASUS\source\repos\BigSchool\BigSchool\obj\Debug\BigSchool.csprojAssemblyReference.cache
