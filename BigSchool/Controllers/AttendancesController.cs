@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BigSchool.Models;
 using System.Web.Http;
+using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
+using BigSchool.DTOs;
 
 namespace BigSchool.Controllers
 {
@@ -32,6 +34,21 @@ namespace BigSchool.Controllers
             _dbContext.SaveChanges();
             return Ok();
         }
+        [HttpPost]
+        public IHttpActionResult Attend(AttendanceDto attendanceDto)
+        {
+            var userId = User.Identity.GetUserId();
+            if (_dbContext.Attendances.Any(a => a.AttendeeId == userId && a.CourseId == attendanceDto.CourseId))
+                return BadRequest("The Attendance already exists!");
+            var attendance = new Attendance
+            {
+                CourseId = attendanceDto.CourseId,
+                AttendeeId = userId
+            };
+            _dbContext.Attendances.Add(attendance);
+            _dbContext.SaveChanges();
 
+            return Ok();
+        }
     }
 }
