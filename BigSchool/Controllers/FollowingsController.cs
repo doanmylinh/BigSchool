@@ -22,7 +22,7 @@ namespace BigSchool.Controllers
         {
             var userId = User.Identity.GetUserId();
             if (_dbContext.Followings.Any(f => f.FollowerId == userId && f.FolloweeId == followingDto.FolloweeId))
-                return BadRequest("Following already exists!");
+                return BadRequest("Following  already exists!");
             var following = new Following
             {
                 FollowerId = userId,
@@ -30,7 +30,22 @@ namespace BigSchool.Controllers
             };
             _dbContext.Followings.Add(following);
             _dbContext.SaveChanges();
-
+            return Ok();
+        }
+        [HttpDelete]
+        public IHttpActionResult UnFollow(string followeeId)
+        {
+            var userId = User.Identity.GetUserId();
+            if (userId == followeeId)
+            {
+                return BadRequest("You cannot unfollow yourself");
+            }
+            var following = _dbContext.Followings.FirstOrDefault(a => a.FolloweeId == followeeId && a.FollowerId == userId);
+            if (following != null)
+            {
+                _dbContext.Followings.Remove(following);
+                _dbContext.SaveChanges();
+            }
             return Ok();
         }
 
